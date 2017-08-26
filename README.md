@@ -74,7 +74,8 @@ post数据需要headers
  ```
  
  3)提取内容
- ```
+
+```
      def getPageItems(self, pageIndex):
         pageCode=self.getPage(pageIndex)
         if not pageCode:
@@ -91,7 +92,8 @@ post数据需要headers
        ```
        
   4)一页结束加载并提取页面的内容
-  ```
+ 
+ ```
       def loadPage(self):
         if self.enable==True:
             if len(self.stories)<2:
@@ -103,7 +105,8 @@ post数据需要headers
             ```
  
  5）每次敲回车输出一个段子
- ```
+
+```
      def getOneStory(self,pageStories,page):
         for story in pageStories:
             input=raw_input()
