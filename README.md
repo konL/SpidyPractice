@@ -101,6 +101,7 @@ post数据需要headers
                     self.stories.append(pageStories)
                     self.pageIndex+=1
             ```
+ 
  5）每次敲回车输出一个段子
  ```
      def getOneStory(self,pageStories,page):
