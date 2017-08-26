@@ -3,7 +3,7 @@
 
 
 ## 糗事百科爬取
-`1`抓取页面内容
+- 抓取页面内容
 ```
 import urllib
 import urllib2
@@ -21,8 +21,7 @@ print response.read()
 ```
 >【raise BadStatusLine(line)】
 出现此问题一般为Headers验证
-
-`2`分析html获取段子
+- 分析html获取段子
 
 正则表达式的说明
 
@@ -35,12 +34,14 @@ print response.read()
 
 4）re.findAll(pattern,string[,flags])搜索String以列表形式返回全部能匹配的子串。
 
-5）re.compile(r'<div.*?class="author.*?>.*?<h2>(.*?)</h2>.*?<div.*?class="content".*?span>(.*?)</span.*?div>.*?class="number">(.*?)</i>',re.S)【解释】.*?=不知道是什么的一大堆东西（.*?需要的一大堆东西）
+5）```re.compile(r'<div.*?class="author.*?>.*?<h2>(.*?)</h2>.*?<div.*?class="content".*?span>(.*?)</span.*?div>.*?class="number">(.*?)</i>',re.S)```
+
+```【解释】.*?=不知道是什么的一大堆东西（.*?需要的一大堆东西）```
 
 6）去掉中间的部分re.sub('<br/>','\n',item[1])
 
 
-`3`逻辑设计（面向对象）
+- 逻辑设计（面向对象）
 
 1)初始化
 
@@ -70,4 +71,45 @@ post数据需要headers
         response=urllib2.urlopen(request)
         content=response.read().decode('utf-8')
         return content
+ ```
+ 
+ 3)提取内容
+ ```
+     def getPageItems(self, pageIndex):
+        pageCode=self.getPage(pageIndex)
+        if not pageCode:
+            print "loding failed"
+            return None
+        pattern=re.compile(r'<div.*?class="author.*?>.*?<h2>(.*?)</h2>.*?<div.*?class="content".*?span>(.*?)</span.*?div>.*?class="number">(.*?)</i>',re.S)
+        items = re.findall(pattern, pageCode)
+        pageStories=[];
+        for item in items:
+            replaceBR=re.compile('<br/>')
+            text=re.sub(replaceBR,'\n',item[1])
+            pageStories.append(([item[0].strip(),text.strip(),item[2].strip()]))
+        return pageStories
+       ```
+       
+  4)一页结束加载并提取页面的内容
+  ```
+      def loadPage(self):
+        if self.enable==True:
+            if len(self.stories)<2:
+                #获取新一页
+                pageStories=self.getPageItems(self.pageIndex)
+                if pageStories:
+                    self.stories.append(pageStories)
+                    self.pageIndex+=1
+            ```
+ 5）每次敲回车输出一个段子
+ ```
+     def getOneStory(self,pageStories,page):
+        for story in pageStories:
+            input=raw_input()
+            self.loadPage()
+            if input=="Q":
+                self.enable=False
+                return
+            print u"第%d页\t发布人:%s\t赞:%s\n%s"%(page,story[0],story[2],story[1])
+
  ```
