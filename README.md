@@ -106,7 +106,9 @@ post数据需要headers
             ```
  
  
+
 5）每次敲回车输出一个段子
+
 
 ```
      def getOneStory(self,pageStories,page):
@@ -117,5 +119,4 @@ post数据需要headers
                 self.enable=False
                 return
             print u"第%d页\t发布人:%s\t赞:%s\n%s"%(page,story[0],story[2],story[1])
-
- ```
+```
