@@ -89,9 +89,11 @@ post数据需要headers
             text=re.sub(replaceBR,'\n',item[1])
             pageStories.append(([item[0].strip(),text.strip(),item[2].strip()]))
         return pageStories
-       ```
+   ```
        
-  4)一页结束加载并提取页面的内容
+ 
+ 4)一页结束加载并提取页面的内容
+ 
  
  ```
       def loadPage(self):
