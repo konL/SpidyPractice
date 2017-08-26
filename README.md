@@ -106,7 +106,7 @@ post数据需要headers
             ```
  
  
- 5）每次敲回车输出一个段子
+5）每次敲回车输出一个段子
 
 ```
      def getOneStory(self,pageStories,page):
