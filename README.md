@@ -94,7 +94,6 @@ post数据需要headers
  
  4)一页结束加载并提取页面的内容
  
- 
  ```
       def loadPage(self):
         if self.enable==True:
@@ -105,6 +104,7 @@ post数据需要headers
                     self.stories.append(pageStories)
                     self.pageIndex+=1
             ```
+ 
  
  5）每次敲回车输出一个段子
 
