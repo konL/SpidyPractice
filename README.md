@@ -119,3 +119,7 @@ post数据需要headers
                 return
             print u"第%d页\t发布人:%s\t赞:%s\n%s"%(page,story[0],story[2],story[1])
 ```
+
+
+#【2】歌词网站爬虫
+输入歌手名字获取该歌手所有歌的歌词并分别写入Exel
